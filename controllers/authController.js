@@ -49,7 +49,8 @@ export const registerUser = async (req, res) => {
     const userExists = await User.findOne({ email });
     console.log({ userExists });
 
-    if (userExists) res.status(409).json({ error: "Email already registered" });
+    if (userExists)
+      return res.status(409).json({ error: "Email already registered" });
 
     const hashedPassword = await hashPassword(password);
     const user = new User({
@@ -60,10 +61,12 @@ export const registerUser = async (req, res) => {
     console.log({ user });
 
     await user.save();
-    res.status(201).json({ message: "User registered successfully" });
+    return res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.log({ error });
-    res.status(500).json({ error: "Something went wrong while creating user" });
+    return res
+      .status(500)
+      .json({ error: "Something went wrong while creating user" });
   }
 };
 
