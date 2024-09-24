@@ -17,13 +17,13 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - username
+ *               - name
  *               - email
  *               - password
  *             properties:
- *               username:
+ *               name:
  *                 type: string
- *                 description: The username of the new user.
+ *                 description: The name of the new user.
  *               email:
  *                 type: string
  *                 format: email

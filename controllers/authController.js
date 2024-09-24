@@ -9,6 +9,7 @@ const registerSchema = Joi.object({
     "string.alphanum": "Name must contain only alphanumeric characters",
     "string.min": "Name must contain atleast 3 character long",
     "string.max": "Name must not exceed 30 characters",
+    "any.required": "Name is required",
   }),
   email: Joi.string().email().required().messages({
     "string.email": "Please enter a valid email address",
@@ -46,6 +47,8 @@ export const registerUser = async (req, res) => {
 
   try {
     const userExists = await User.findOne({ email });
+    console.log({ userExists });
+
     if (userExists) res.status(409).json({ error: "Email already registered" });
 
     const hashedPassword = await hashPassword(password);
@@ -54,6 +57,8 @@ export const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
+    console.log({ user });
+
     await user.save();
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
