@@ -15,7 +15,8 @@ export const createTask = async (req, res) => {
     res.status(201).json(task);
   } catch (error) {
     console.log({ error });
-    res.status(400).json({ error: "Error while creating task" });
+
+    res.status(500).json({ error: "Server error" });
   }
 };
 
@@ -27,7 +28,8 @@ export const getTasks = async (req, res) => {
     res.json(tasks);
   } catch (error) {
     console.log({ error });
-    res.status(400).json({ error: "Error while fetching tasks" });
+
+    res.status(500).json({ error: "Server error" });
   }
 };
 
@@ -46,7 +48,7 @@ export const getTask = async (req, res) => {
   } catch (error) {
     console.log({ error });
 
-    res.status(400).json({ error: "Error deleting task" });
+    res.status(500).json({ error: "Server error" });
   }
 };
 
@@ -72,7 +74,7 @@ export const updateTask = async (req, res) => {
   } catch (error) {
     console.log({ error });
 
-    res.status(400).json({ error: "Error updating task" });
+    res.status(500).json({ error: "Server error" });
   }
 };
 
@@ -91,6 +93,7 @@ export const deleteTask = async (req, res) => {
     res.json({ message: "Task deleted successfully" });
   } catch (error) {
     console.log({ error });
-    res.status(400).json({ error: "Error deleting task" });
+
+    res.status(500).json({ error: "Server error" });
   }
 };
